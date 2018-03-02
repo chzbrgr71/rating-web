@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Intelligent Cloud Azure Container Hackfest Pittsburgh
+        Kubernetes Pittsburgh Meetup
       </div>
       <div class="col-lg-6">
       </div>
