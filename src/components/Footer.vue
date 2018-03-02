@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Kubernetes Pittsburgh Meetup
+        Intelligent Cloud Black Belt Team
       </div>
       <div class="col-lg-6">
       </div>
