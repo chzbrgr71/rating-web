@@ -75,12 +75,15 @@ html {
 
 .credits-black {
   font-family: "Graduate", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: #000;
 }
 
 .credits-tag {
   padding-top: 40px;
+}
+.credits-other {
+  padding-bottom: 10px;
 }
 
 .footspace {

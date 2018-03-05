@@ -78,7 +78,7 @@ export default {
           this.$Notify({ title: `Seriously?`, message: `He's just a rich guy. Zero super powers. Altrustic? Yes. Not a Superhero. Are you a PM?`, type: 'warning', duration: 10000 })
         }
         
-        if (name === 'Ronaldo' && event > 3.5) {
+        if (name === 'Cristiano Ronaldo' && event > 3.5) {
           this.$Notify({ title: `Seriously?`, message: `While you voted, Ronaldo just took another dive...`, type: 'warning', duration: 10000 })
         }
       },
