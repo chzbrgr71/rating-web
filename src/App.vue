@@ -81,6 +81,7 @@ html {
 
 .credits-tag {
   padding-top: 40px;
+  padding-bottom: 10px;
 }
 .credits-other {
   padding-bottom: 10px;

@@ -28,7 +28,7 @@
       <div class="col-lg-6">
       </div>
     </div>
-    <div class="row at-row flex-center flex-middle">
+    <div class="row at-row flex-center flex-middle credits-other">
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12">
@@ -37,7 +37,7 @@
       <div class="col-lg-6">
       </div>
     </div>
-        <div class="row at-row flex-center flex-middle">
+    <div class="row at-row flex-center flex-middle credits-other">
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12">
