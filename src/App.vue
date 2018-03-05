@@ -69,13 +69,13 @@ html {
 
 .credits {
   font-family: "Graduate", sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   color: #fff;
 }
 
 .credits-black {
   font-family: "Graduate", sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   color: #000;
 }
 
