@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Intelligent Cloud Black Belt Team
+        Azure Container Hackfest
       </div>
       <div class="col-lg-6">
       </div>
