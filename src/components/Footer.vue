@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Azure Container Hackfest Buenos Aires
+        Azure Container Hackfest
       </div>
       <div class="col-lg-6">
       </div>
