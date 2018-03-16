@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Kubernetes Test
+        Kubernetes Hackfest Chile
       </div>
       <div class="col-lg-6">
       </div>
