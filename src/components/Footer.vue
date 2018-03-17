@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Kubernetes Hackfest Fun Times
+        Kubernetes Hackfest Fix
       </div>
       <div class="col-lg-6">
       </div>
