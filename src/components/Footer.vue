@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Kubernetes Hackfest Colombia
+        Kubernetes Hackfest Colombia && Atlanta
       </div>
       <div class="col-lg-6">
       </div>
