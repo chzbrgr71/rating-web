@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Kubernetes Hackfest Colombia - JDS
+        Azure Kubernetes Service Rocks!
       </div>
       <div class="col-lg-6">
       </div>
