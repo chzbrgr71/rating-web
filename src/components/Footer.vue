@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Pittsburgh Winter should be over
+        MOVING TO CALIFORNIA
       </div>
       <div class="col-lg-6">
       </div>
