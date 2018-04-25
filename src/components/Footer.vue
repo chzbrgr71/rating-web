@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        MOVING TO CALIFORNIA
+        Burlington is not Boston
       </div>
       <div class="col-lg-6">
       </div>
