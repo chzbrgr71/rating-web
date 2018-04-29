@@ -6,31 +6,31 @@ events.on("push", (brigadeEvent, project) => {
     var gitPayload = JSON.parse(brigadeEvent.payload)
     var brigConfig = new Map()
     brigConfig.set("acrServer", project.secrets.acrServer)
-    brigConfig.set("acrUsername", project.secrets.acrUsername)
-    brigConfig.set("acrPassword", project.secrets.acrPassword)
-    brigConfig.set("webImage", "chzbrgr71/rating-web")
+    brigConfig.set("acrName", project.secrets.acrName)
+    brigConfig.set("azServicePrincipal", project.secrets.azServicePrincipal)
+    brigConfig.set("azClientSecret", project.secrets.azClientSecret)
+    brigConfig.set("azTenant", project.secrets.azTenant)
     brigConfig.set("gitSHA", brigadeEvent.revision.commit.substr(0,7))
     brigConfig.set("eventType", brigadeEvent.type)
     brigConfig.set("branch", getBranch(gitPayload))
-    var today = new Date()
-    brigConfig.set("buildDate", today.toISOString().substring(0, 10))
+    brigConfig.set("webImage", "chzbrgr71/rating-web")
     brigConfig.set("imageTag", `${brigConfig.get("branch")}-${brigConfig.get("gitSHA")}`)
-    brigConfig.set("webACRImage", `${brigConfig.get("acrServer")}/${brigConfig.get("webImage")}`)
-    
-    console.log(`==> gitHub webook (${brigConfig.get("branch")}) with commit ID ${brigConfig.get("gitSHA")}`)
-    console.log(`==> Date ${brigConfig.get("buildDate")}`)
+    brigConfig.set("acrImage", `${brigConfig.get("webImage")}:${brigConfig.get("imageTag")}`)
 
+    console.log(`==> gitHub webook (${brigConfig.get("branch")}) with commit ID ${brigConfig.get("gitSHA")}`)
+    
     // setup brigade jobs
-    var docker = new Job("job-runner-docker")
+    var acrbuilder = new Job("job-runner-acr-builder")
     var helm = new Job("job-runner-helm")
-    dockerJobRunner(brigConfig, docker)
-    helmJobRunner(brigConfig, helm, "prod")
+    acrJobRunner(brigConfig, acrbuilder)
+    helmJobRunner(brigConfig, helm)
     
     // start pipeline
-    console.log(`==> starting pipeline for docker image: ${brigConfig.get("webACRImage")}:${brigConfig.get("imageTag")}`)
+    console.log(`==> starting pipeline for docker image: ${brigConfig.get("webImage")}:${brigConfig.get("imageTag")}`)
     var pipeline = new Group()
-    pipeline.add(docker)
+    pipeline.add(acrbuilder)
     pipeline.add(helm)
+    
     if (brigConfig.get("branch") == "master") {
         pipeline.runEach()
     } else {
@@ -39,44 +39,27 @@ events.on("push", (brigadeEvent, project) => {
 })
 
 events.on("after", (event, proj) => {
-    console.log("brigade pipeline finished successfully")
-
-    var slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
-    slack.storage.enabled = false
-    slack.env = {
-      SLACK_WEBHOOK: proj.secrets.slackWebhook,
-      SLACK_USERNAME: "brigade-demo",
-      SLACK_MESSAGE: "brigade pipeline finished. heroes web updated",
-      SLACK_COLOR: "#ff0000"
-    }
-	slack.run()
-    
+    console.log("brigade pipeline finished successfully")    
 })
 
-function dockerJobRunner(config, d) {
-    d.storage.enabled = false
-    d.image = "chzbrgr71/dockernd:node"
-    d.privileged = true
-    d.tasks = [
-        "dockerd-entrypoint.sh &",
-        "echo waiting && sleep 20",
+function acrJobRunner(config, acr) {
+    acr.storage.enabled = false
+    acr.image = "briaracreu.azurecr.io/chzbrgr71/azure-cli:0.0.5"
+    acr.tasks = [
         "cd /src/",
-        `docker login ${config.get("acrServer")} -u ${config.get("acrUsername")} -p ${config.get("acrPassword")}`,
-        `docker build --build-arg BUILD_DATE=${config.get("buildDate")} --build-arg IMAGE_TAG_REF=${config.get("imageTag")} --build-arg VCS_REF=${config.get("gitSHA")} -t ${config.get("webImage")} .`,
-        `docker tag ${config.get("webImage")} ${config.get("webACRImage")}:${config.get("imageTag")}`,
-        `docker push ${config.get("webACRImage")}:${config.get("imageTag")}`,
-        "killall dockerd"
+        `az login --service-principal -u ${config.get("azServicePrincipal")} -p ${config.get("azClientSecret")} --tenant ${config.get("azTenant")}`,
+        `az acr build -t ${config.get("acrImage")} --build-arg IMAGE_TAG_REF=${config.get("imageTag")} -f ./Dockerfile --context . -r ${config.get("acrName")}`
     ]
 }
 
-function helmJobRunner (config, h, deployType) {
+function helmJobRunner (config, h) {
     h.storage.enabled = false
     h.image = "chzbrgr71/k8s-helm:v2.7.2"
     h.tasks = [
         "cd /src/",
         "git clone https://github.com/chzbrgr71/rating-charts.git",
         "cd rating-charts",
-        `helm upgrade --install rating-web ./rating-web --set web.image=${config.get("webACRImage")} --set web.imageTag=${config.get("imageTag")}`
+        `helm upgrade --install --reuse-values rating-web ./rating-web --set web.image=${config.get("acrServer")}/${config.get("webImage")} --set web.imageTag=${config.get("imageTag")}`
     ]
 }
 

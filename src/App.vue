@@ -211,7 +211,7 @@ h4 {
 }
 
 .super-name {
-  font-size: 28px;
+  font-size: 24px;
   color: #fff;
   font-family: "Bangers", cursive;
   font-weight: 100;
