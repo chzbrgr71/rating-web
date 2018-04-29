@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Brian is super cool
+        Azure Container Day - Copenhagen
       </div>
       <div class="col-lg-6">
       </div>
@@ -32,7 +32,6 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12">
-        <span class="credits">IMAGE BUILD DATE:&nbsp;</span><span class="credits-black">{{imageDate}}</span>
       </div>
       <div class="col-lg-6">
       </div>
@@ -41,7 +40,6 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12">
-        <span class="credits">K8S INFO:&nbsp;&nbsp;</span><span class="credits-black">{{k8sNodeName}}&nbsp;:&nbsp;{{k8sPodName}}&nbsp;:&nbsp;{{k8sPodIp}} </span>
       </div>
       <div class="col-lg-6">
       </div>
