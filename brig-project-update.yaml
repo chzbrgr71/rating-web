@@ -11,6 +11,7 @@ github:
   token: "<change this>"
 secrets:
   acrServer: <change this>.azurecr.io
-  acrUsername: <change this>
-  acrPassword: "<change this>"
-  slackWebhook: "<change this>"
+  acrName: <change this>
+  azServicePrincipal: <change this>
+  azClientSecret: <change this>
+  azTenant: <change this>
